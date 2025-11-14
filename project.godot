@@ -1,0 +1,41 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="GodotVRPong"
+run/main_scene="uid://dpgwdj6kyi1sq"
+config/features=PackedStringArray("4.5", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+Util="*res://util.gd"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=2
+
+[debug_draw_3d]
+
+settings/addon_root_folder="res://addons/debug_draw_3d"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/sk_fly_camera/plugin.cfg")
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[xr]
+
+openxr/enabled=true
+shaders/enabled=true
