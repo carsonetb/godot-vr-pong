@@ -100,4 +100,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.6444342)
 [node name="Headset" type="Node3D" parent="OtherOrigin"]
 
 [node name="headset" parent="OtherOrigin/Headset" instance=ExtResource("7_wjctj")]
-transform = Transform3D(-6.5567085e-09, 0, 0.15, 0, 0.15, 0, -0.15, 0, -6.5567085e-09, 0, 0.966279, 3.604476)
+transform = Transform3D(-6.556709e-09, 0, -0.14999999, 0, 0.14999999, 0, 0.14999999, 0, -6.556709e-09, 0, 0, 0)
