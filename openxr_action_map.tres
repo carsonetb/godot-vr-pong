@@ -1,4 +1,4 @@
-[gd_resource type="OpenXRActionMap" load_steps=31 format=3 uid="uid://dcwpugyxsipck"]
+[gd_resource type="OpenXRActionMap" load_steps=17 format=3 uid="uid://dcwpugyxsipck"]
 
 [sub_resource type="OpenXRAction" id="OpenXRAction_6ivru"]
 resource_name = "reset_ball"
@@ -47,30 +47,6 @@ binding_path = "/user/hand/left/input/menu/click"
 interaction_profile_path = "/interaction_profiles/khr/simple_controller"
 bindings = [SubResource("OpenXRIPBinding_typ1r"), SubResource("OpenXRIPBinding_clvbf"), SubResource("OpenXRIPBinding_5bppb"), SubResource("OpenXRIPBinding_3k6la"), SubResource("OpenXRIPBinding_i8esw")]
 
-[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_oqnsu"]
-action = SubResource("OpenXRAction_6ivru")
-binding_path = "/user/hand/left/input/trigger/click"
-
-[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_r5bl7"]
-action = SubResource("OpenXRAction_6ivru")
-binding_path = "/user/hand/right/input/trigger/click"
-
-[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_ytptc"]
-action = SubResource("OpenXRAction_5w03k")
-binding_path = "/user/hand/left/input/a/click"
-
-[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_iphn4"]
-action = SubResource("OpenXRAction_vfhwq")
-binding_path = "/user/hand/left/output/haptic"
-
-[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_3p2as"]
-action = SubResource("OpenXRAction_vfhwq")
-binding_path = "/user/hand/right/output/haptic"
-
-[sub_resource type="OpenXRInteractionProfile" id="OpenXRInteractionProfile_wdehm"]
-interaction_profile_path = "/interaction_profiles/valve/index_controller"
-bindings = [SubResource("OpenXRIPBinding_oqnsu"), SubResource("OpenXRIPBinding_r5bl7"), SubResource("OpenXRIPBinding_ytptc"), SubResource("OpenXRIPBinding_iphn4"), SubResource("OpenXRIPBinding_3p2as")]
-
 [sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_clfly"]
 action = SubResource("OpenXRAction_vfhwq")
 binding_path = "/user/hand/left/output/haptic"
@@ -95,36 +71,6 @@ binding_path = "/user/hand/left/input/menu/click"
 interaction_profile_path = "/interaction_profiles/htc/vive_controller"
 bindings = [SubResource("OpenXRIPBinding_clfly"), SubResource("OpenXRIPBinding_e1frq"), SubResource("OpenXRIPBinding_l7aq8"), SubResource("OpenXRIPBinding_oi0ij"), SubResource("OpenXRIPBinding_m08eo")]
 
-[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_6ivru"]
-action = SubResource("OpenXRAction_vfhwq")
-binding_path = "/user/hand/left/output/haptic"
-
-[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_vfhwq"]
-action = SubResource("OpenXRAction_vfhwq")
-binding_path = "/user/hand/right/output/haptic"
-
-[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_5w03k"]
-action = SubResource("OpenXRAction_5w03k")
-binding_path = "/user/hand/left/input/x/click"
-
-[sub_resource type="OpenXRAnalogThresholdModifier" id="OpenXRAnalogThresholdModifier_6ivru"]
-
-[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_um1hv"]
-action = SubResource("OpenXRAction_6ivru")
-binding_path = "/user/hand/left/input/trigger/value"
-binding_modifiers = [SubResource("OpenXRAnalogThresholdModifier_6ivru")]
-
-[sub_resource type="OpenXRAnalogThresholdModifier" id="OpenXRAnalogThresholdModifier_oqnsu"]
-
-[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_wdehm"]
-action = SubResource("OpenXRAction_6ivru")
-binding_path = "/user/hand/right/input/trigger/value"
-binding_modifiers = [SubResource("OpenXRAnalogThresholdModifier_oqnsu")]
-
-[sub_resource type="OpenXRInteractionProfile" id="OpenXRInteractionProfile_typ1r"]
-interaction_profile_path = "/interaction_profiles/oculus/touch_controller"
-bindings = [SubResource("OpenXRIPBinding_6ivru"), SubResource("OpenXRIPBinding_vfhwq"), SubResource("OpenXRIPBinding_5w03k"), SubResource("OpenXRIPBinding_um1hv"), SubResource("OpenXRIPBinding_wdehm")]
-
 [resource]
 action_sets = [SubResource("OpenXRActionSet_vfhwq")]
-interaction_profiles = [SubResource("OpenXRInteractionProfile_um1hv"), SubResource("OpenXRInteractionProfile_wdehm"), SubResource("OpenXRInteractionProfile_c4j1d"), SubResource("OpenXRInteractionProfile_typ1r")]
+interaction_profiles = [SubResource("OpenXRInteractionProfile_um1hv"), SubResource("OpenXRInteractionProfile_c4j1d")]
