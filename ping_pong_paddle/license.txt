@@ -1,0 +1,11 @@
+Model Information:
+* title:	Ping Pong Paddle
+* source:	https://sketchfab.com/3d-models/ping-pong-paddle-339267841abb419fb6c649f36b5e6f31
+* author:	ethan_garden (https://sketchfab.com/ethan_garden)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Ping Pong Paddle" (https://sketchfab.com/3d-models/ping-pong-paddle-339267841abb419fb6c649f36b5e6f31) by ethan_garden (https://sketchfab.com/ethan_garden) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

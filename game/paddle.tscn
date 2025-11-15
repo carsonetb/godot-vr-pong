@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://csdmgpladhhw6"]
+
+[ext_resource type="PackedScene" uid="uid://doyojug37gtue" path="res://ping_pong_paddle/scene.gltf" id="1_185fh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_185fh"]
+size = Vector3(0.15, 0.27, 0.016)
+
+[node name="Paddle" type="Node3D"]
+
+[node name="Model" parent="." instance=ExtResource("1_185fh")]
+transform = Transform3D(0.023843562, -0.010367475, -8.0055506e-17, -4.5317686e-10, -1.0422359e-09, 0.026000004, -0.0103674745, -0.023843564, -1.1364959e-09, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_185fh")
