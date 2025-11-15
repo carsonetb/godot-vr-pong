@@ -42,16 +42,15 @@ enabled=PackedStringArray("res://addons/logger/plugin.cfg", "res://addons/sk_fly
 [rendering]
 
 textures/vram_compression/import_etc2_astc=true
-viewport/transparent_background=true
 
 [steam]
 
 initialization/app_id=480
+initialization/initialize_on_startup=false
+initialization/embed_callbacks=false
 
 [xr]
 
 openxr/enabled=true
 shaders/enabled=true
-openxr/extensions/htc/passthrough=true
-openxr/extensions/meta/passthrough=true
 openxr/extensions/meta/color_space/starting_color_space=3

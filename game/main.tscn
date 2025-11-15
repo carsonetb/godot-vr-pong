@@ -1,10 +1,19 @@
-[gd_scene load_steps=11 format=3 uid="uid://dpgwdj6kyi1sq"]
+[gd_scene load_steps=14 format=3 uid="uid://dpgwdj6kyi1sq"]
 
 [ext_resource type="Script" uid="uid://cc41hyx06tsk0" path="res://game/main.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://bq7ww14tsiuhp" path="res://game/ball.gd" id="2_0xm2m"]
 [ext_resource type="ArrayMesh" uid="uid://dvtxojks84nx8" path="res://table/PingPongTable/10520_pingpongtable_L2.obj" id="3_h2yge"]
 [ext_resource type="Texture2D" uid="uid://bb7li4qkegdcl" path="res://wood_texture/2K/Poliigon_WoodVeneerOak_7760_BaseColor.jpg" id="4_5un7r"]
 [ext_resource type="Texture2D" uid="uid://8tstciu7kv64" path="res://wood_texture/2K/Poliigon_WoodVeneerOak_7760_Normal.png" id="5_dgpao"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5un7r"]
+
+[sub_resource type="Sky" id="Sky_dgpao"]
+sky_material = SubResource("ProceduralSkyMaterial_5un7r")
+
+[sub_resource type="Environment" id="Environment_wjctj"]
+background_mode = 2
+sky = SubResource("Sky_dgpao")
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_h2yge"]
 friction = 0.3
@@ -27,6 +36,9 @@ size = Vector2(3.385, 7.676)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_ig7tw")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wjctj")
 
 [node name="Ball" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4444612, -0.1419652)
