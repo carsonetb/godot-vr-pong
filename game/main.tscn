@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dpgwdj6kyi1sq"]
+[gd_scene load_steps=11 format=3 uid="uid://dpgwdj6kyi1sq"]
 
-[ext_resource type="Script" uid="uid://cc41hyx06tsk0" path="res://main.gd" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://bq7ww14tsiuhp" path="res://ball.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://cc41hyx06tsk0" path="res://game/main.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://bq7ww14tsiuhp" path="res://game/ball.gd" id="2_0xm2m"]
 [ext_resource type="ArrayMesh" uid="uid://dvtxojks84nx8" path="res://table/PingPongTable/10520_pingpongtable_L2.obj" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://bb7li4qkegdcl" path="res://wood_texture/2K/Poliigon_WoodVeneerOak_7760_BaseColor.jpg" id="4_5un7r"]
+[ext_resource type="Texture2D" uid="uid://8tstciu7kv64" path="res://wood_texture/2K/Poliigon_WoodVeneerOak_7760_Normal.png" id="5_dgpao"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_h2yge"]
 friction = 0.3
@@ -15,7 +17,9 @@ radius = 0.02
 size = Vector3(1.5309961, 0.08502197, 2.7635546)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
-albedo_color = Color(0.8552147, 0, 0.104296185, 1)
+albedo_texture = ExtResource("4_5un7r")
+normal_enabled = true
+normal_texture = ExtResource("5_dgpao")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_1bvp3"]
 material = SubResource("StandardMaterial3D_h2yge")
