@@ -23,6 +23,9 @@ func _ready() -> void:
 		_networking_stream.error("Steam did not initialize successfully! Networking features will be unavailable!")
 		return
 	
+	steam_id = Steam.getSteamID()
+	steam_username = Steam.getFriendPersonaName(steam_id)
+	
 	Steam.join_requested.connect(_on_lobby_join_requested)
 	Steam.lobby_chat_update.connect(_on_lobby_chat_update)
 	Steam.lobby_created.connect(_on_lobby_created)
@@ -30,6 +33,7 @@ func _ready() -> void:
 	Steam.persona_state_change.connect(_on_persona_change)
 	Steam.p2p_session_request.connect(_on_p2p_session_request)
 	Steam.p2p_session_connect_fail.connect(_on_p2p_session_connect_fail)
+	Steam.lobby_joined.connect(_on_lobby_joined)
 	
 	check_command_line()
 	
@@ -69,7 +73,17 @@ func read_p2p_packet() -> void:
 		
 		if readable_data["message"] == "handshake":
 			_networking_stream.info("Handshake from %s" % Steam.getFriendPersonaName(packet_sender))
-		
+		if readable_data["message"] == "set_variable":
+			get_node(readable_data["path"]).set(readable_data["varname"], readable_data["value"])
+		if readable_data["message"] == "call_function":
+			get_node(readable_data["path"]).callv(readable_data["name"], readable_data["args"])
+
+func set_remote_variable(node: Node, varname: String) -> void:
+	send_p2p_packet(0, {"message": "set_variable", "path": node.get_path(), "varname": varname, "value": node.get(varname)})
+
+func call_remote_function(node: Node, function: String, args: Array) -> void:
+	send_p2p_packet(0, {"message": "call_function", "path": node.get_path(), "name": function, "args": args})
+
 func send_p2p_packet(this_target: int, packet_data: Dictionary) -> void:
 	var send_type: int = Steam.P2P_SEND_RELIABLE
 	var channel: int = 0
