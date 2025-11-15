@@ -6,8 +6,8 @@ extends RigidBody3D
 var previous_ball_positions: Array[Vector3]
 
 func _ready() -> void:
-	apply_central_impulse(Vector3(0.02, 0.01, 0))
-	apply_torque_impulse(Vector3(0, 0.01, 0))
+	apply_central_impulse(Vector3(0.0, -0.01, -0.02))
+	apply_torque_impulse(Vector3(0, 0, -0.01))
 
 func _physics_process(_delta: float) -> void:
 	if !apply_drag:
@@ -20,7 +20,7 @@ func _physics_process(_delta: float) -> void:
 	apply_central_force(Util.compute_magnus_effect(linear_velocity, angular_velocity))
 
 func _process(_delta: float) -> void:
-	Engine.time_scale = 1
+	Engine.time_scale = 0.1
 	previous_ball_positions.append(position)
 	DebugDraw3D.draw_sphere(position, 0.1, Color.WHITE)
 	for pos: Vector3 in previous_ball_positions:

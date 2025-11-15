@@ -1,16 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpgwdj6kyi1sq"]
+[gd_scene load_steps=9 format=3 uid="uid://dpgwdj6kyi1sq"]
 
 [ext_resource type="Script" uid="uid://cc41hyx06tsk0" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://bq7ww14tsiuhp" path="res://ball.gd" id="2_0xm2m"]
+[ext_resource type="ArrayMesh" uid="uid://dvtxojks84nx8" path="res://table/PingPongTable/10520_pingpongtable_L2.obj" id="3_h2yge"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_h2yge"]
+friction = 0.3
+bounce = 0.91
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_h2yge"]
 radius = 0.02
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1bvp3"]
+size = Vector3(1.5309961, 0.08502197, 2.7635546)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+albedo_color = Color(0.8552147, 0, 0.104296185, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1bvp3"]
+material = SubResource("StandardMaterial3D_h2yge")
+size = Vector2(3.385, 7.676)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_ig7tw")
 
 [node name="Ball" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4444612, -0.1419652)
 mass = 0.003
+physics_material_override = SubResource("PhysicsMaterial_h2yge")
 continuous_cd = true
 linear_damp_mode = 1
 script = ExtResource("2_0xm2m")
@@ -18,19 +35,10 @@ script = ExtResource("2_0xm2m")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ball"]
 shape = SubResource("SphereShape3D_h2yge")
 
-[node name="Ball2" type="RigidBody3D" parent="."]
-mass = 0.003
-continuous_cd = true
-linear_damp_mode = 1
-script = ExtResource("2_0xm2m")
-apply_drag = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball2"]
-shape = SubResource("SphereShape3D_h2yge")
-
 [node name="Origin" type="XROrigin3D" parent="."]
 
 [node name="XRCamera3D" type="XRCamera3D" parent="Origin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3796642, 0)
 
 [node name="LeftHand" type="XRController3D" parent="Origin"]
 tracker = &"left_hand"
@@ -39,3 +47,22 @@ show_when_tracked = true
 [node name="RightHand" type="XRController3D" parent="Origin"]
 tracker = &"right_hand"
 show_when_tracked = true
+
+[node name="Table" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0054980516, 0.712489, -1.739693)
+shape = SubResource("BoxShape3D_1bvp3")
+
+[node name="10520PingpongtableL2" type="MeshInstance3D" parent="Table"]
+transform = Transform3D(0.01, 0, 0, 0, -4.3711387e-10, 0.01, 0, -0.01, -4.3711387e-10, -0.0068680346, -0.056136936, -1.7369777)
+mesh = ExtResource("3_h2yge")
+skeleton = NodePath("../..")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.44789955, 0.89408386, 0, -0.89408386, 0.44789955, 0, 0.15096873, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.7277545)
+mesh = SubResource("PlaneMesh_1bvp3")
