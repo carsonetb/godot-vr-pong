@@ -1,0 +1,88 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcmpe4efld5t"]
+
+[ext_resource type="Script" uid="uid://cfstxklmnk4jb" path="res://game/ui/ingame_ui.gd" id="1_hjrhi"]
+[ext_resource type="Theme" uid="uid://cvjpb0njmudu5" path="res://game/ui/main_theme.tres" id="1_oa50s"]
+
+[node name="IngameUI" type="CanvasLayer" node_paths=PackedStringArray("singleplayer_button", "multiplayer_button", "main_menu_container", "lobby_list_container", "lobby_list_vbox", "members_list_container", "members_list_vbox")]
+follow_viewport_enabled = true
+script = ExtResource("1_hjrhi")
+singleplayer_button = NodePath("MarginContainer/MainMenuUI/VSplitContainer/HSplitContainer/SingleplayerButton")
+multiplayer_button = NodePath("MarginContainer/MainMenuUI/VSplitContainer/HSplitContainer/MultiplayerButton")
+main_menu_container = NodePath("MarginContainer/MainMenuUI")
+lobby_list_container = NodePath("MarginContainer/LobbyList")
+lobby_list_vbox = NodePath("MarginContainer/LobbyList/ListContainer")
+members_list_container = NodePath("MarginContainer/MembersList")
+members_list_vbox = NodePath("MarginContainer/MembersList/VBoxContainer/ListContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 459.0
+offset_bottom = 575.0
+theme = ExtResource("1_oa50s")
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MainMenuUI" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 200
+
+[node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer/MainMenuUI"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MainMenuUI/VSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 30
+text = "Godot VR Ping Pong"
+horizontal_alignment = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/MainMenuUI/VSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.28
+
+[node name="SingleplayerButton" type="Button" parent="MarginContainer/MainMenuUI/VSplitContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Singleplayer"
+
+[node name="MultiplayerButton" type="Button" parent="MarginContainer/MainMenuUI/VSplitContainer/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Multiplayer"
+
+[node name="LobbyList" type="MarginContainer" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="ListContainer" type="VBoxContainer" parent="MarginContainer/LobbyList"]
+layout_mode = 2
+
+[node name="MembersList" type="MarginContainer" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MembersList"]
+layout_mode = 2
+
+[node name="LobbyNameLabel" type="Label" parent="MarginContainer/MembersList/VBoxContainer"]
+layout_mode = 2
+text = "Name: Example Name"
+
+[node name="ListContainer" type="VBoxContainer" parent="MarginContainer/MembersList/VBoxContainer"]
+layout_mode = 2
+
+[node name="LeaveLobbyButton" type="Button" parent="MarginContainer/MembersList/VBoxContainer"]
+layout_mode = 2
+text = "Exit Lobby"

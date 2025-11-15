@@ -1,5 +1,9 @@
 extends Node
 
+signal lobby_match_list(lobbies: Array[LobbyInfo])
+signal lobby_joined
+signal member_list_updated(list: Array[LobbyMember])
+
 const STEAM_APP_ID: int = 480
 const PACKET_READ_LIMIT: int = 32
 const LOBBY_NAME: String = "Ping Pong Test"
@@ -8,15 +12,15 @@ const LOBBY_MODE: String = "Default"
 var _networking_stream := LogStream.new("Networking", LogStream.LogLevel.DEBUG)
 
 var networking_enabled: bool = false
-var lobby_data: Dictionary
+var lobby_data: LobbyInfo
 var lobby_id: int = 0
-var lobby_members: Array = []
+var lobby_members: Array[LobbyMember]
 var lobby_members_max: int = 10
 var lobby_vote_kick: bool = false
 var steam_id: int
 var steam_username: String
 
-func _ready() -> void:
+func begin_networking() -> void:
 	var initialize_response: Dictionary = Steam.steamInitEx()
 	_networking_stream.debug("Raw Steam init response: %s" % initialize_response)
 	if initialize_response["status"] > Steam.STEAM_API_INIT_RESULT_OK:
@@ -40,7 +44,7 @@ func _ready() -> void:
 	Steam.addRequestLobbyListDistanceFilter(Steam.LOBBY_DISTANCE_FILTER_WORLDWIDE)
 	
 	_networking_stream.debug("Requesting lobby list")
-	Steam.requestLobbyList()
+	request_lobbies()
 	
 	_networking_stream.info("Networking setup complete and successful")
 
@@ -49,7 +53,10 @@ func _process(_delta: float) -> void:
 	
 	if lobby_id > 0:
 		read_all_p2p_packets()
-	
+
+func request_lobbies() -> void:
+	Steam.requestLobbyList()
+
 func read_all_p2p_packets(read_count: int = 0) -> void:
 	if read_count >= PACKET_READ_LIMIT:
 		return
@@ -93,9 +100,9 @@ func send_p2p_packet(this_target: int, packet_data: Dictionary) -> void:
 	
 	if this_target == 0:
 		if lobby_members.size() > 1:
-			for member: Dictionary in lobby_members:
-				if member["steam_id"] != steam_id:
-					Steam.sendP2PPacket(member["steam_id"], this_data, send_type, channel)
+			for member in lobby_members:
+				if member.id != steam_id:
+					Steam.sendP2PPacket(member.id, this_data, send_type, channel)
 	else:
 		Steam.sendP2PPacket(this_target, this_data, send_type, channel)
 
@@ -125,7 +132,9 @@ func get_lobby_members() -> void:
 		var member_steam_id: int = Steam.getLobbyMemberByIndex(lobby_id, this_member)
 		var member_steam_name: String = Steam.getFriendPersonaName(member_steam_id)
 		
-		lobby_members.append({"steam_id":member_steam_id, "steam_name":member_steam_name})
+		lobby_members.append(LobbyMember.new(member_steam_id, member_steam_name))
+	
+	member_list_updated.emit(lobby_members)
 
 func make_p2p_handshake() -> void:
 	_networking_stream.debug("Sending P2P handshake to the lobby")
@@ -137,30 +146,32 @@ func _on_lobby_created(connect_response: int, this_lobby_id: int) -> void:
 		_networking_stream.info("Created a lobby: %s" % lobby_id)
 		
 		Steam.setLobbyJoinable(lobby_id, true)
-		Steam.setLobbyData(lobby_id, "name", LOBBY_NAME)
+		Steam.setLobbyData(lobby_id, "name", "%s's lobby" % steam_username)
 		Steam.setLobbyData(lobby_id, "mode", LOBBY_MODE)
 		
-		var set_realy: bool = Steam.allowP2PPacketRelay(true)
-		_networking_stream.debug("Allowing Steam to be relay backup: %s" % set_realy)
+		var set_relay: bool = Steam.allowP2PPacketRelay(true)
+		_networking_stream.debug("Allowing Steam to be relay backup: %s" % set_relay)
 
 func _on_lobby_match_list(these_lobbies: Array) -> void:
+	var out: Array[LobbyInfo]
 	for lobby: int in these_lobbies:
 		var lobby_name: String = Steam.getLobbyData(lobby, "name")
-		
-		if lobby_name == LOBBY_NAME:
-			_networking_stream.debug("First lobby with correct name found, using")
-			join_lobby(lobby)
-			return
-	_networking_stream.debug("No lobbies exist, creating one.")
-	create_lobby()
+		var lobby_mode: String = Steam.getLobbyData(lobby, "mode")
+		var num_members: int = Steam.getNumLobbyMembers(lobby)
+		if lobby_mode == LOBBY_MODE:
+			out.append(LobbyInfo.new(lobby, lobby_name, num_members))
+			
+	lobby_match_list.emit(out)
 
 func _on_lobby_joined(this_lobby_id: int, _permissions: int, _locked: bool, response: int) -> void:
 	if response == Steam.CHAT_ROOM_ENTER_RESPONSE_SUCCESS:
 		lobby_id = this_lobby_id
+		lobby_data = LobbyInfo.new(lobby_id, Steam.getLobbyData(lobby_id, "name"), Steam.getNumLobbyMembers(lobby_id))
 		
 		get_lobby_members()
 		make_p2p_handshake()
-	
+		
+		lobby_joined.emit()
 	else:
 		var fail_reason: String
 		
@@ -226,3 +237,21 @@ func _on_p2p_session_connect_fail(this_steam_id: int, session_error: int) -> voi
 		print("WARNING: Session failure with %s: unused" % this_steam_id)
 	else:
 		print("WARNING: Session failure with %s: unknown error %s" % [this_steam_id, session_error])
+
+class LobbyInfo:
+	func _init(p_id: int, p_lobby_name: String, p_num_members: int) -> void:
+		id = p_id
+		lobby_name = p_lobby_name
+		num_members = p_num_members
+	
+	var id: int
+	var lobby_name: String
+	var num_members: int
+
+class LobbyMember:
+	func _init(p_id: int, p_member_name: String) -> void:
+		id = p_id
+		member_name = p_member_name
+	
+	var id: int
+	var member_name: String
