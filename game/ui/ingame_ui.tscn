@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cfstxklmnk4jb" path="res://game/ui/ingame_ui.gd" id="1_hjrhi"]
 [ext_resource type="Theme" uid="uid://cvjpb0njmudu5" path="res://game/ui/main_theme.tres" id="1_oa50s"]
 
-[node name="IngameUI" type="CanvasLayer" node_paths=PackedStringArray("singleplayer_button", "multiplayer_button", "main_menu_container", "lobby_list_container", "lobby_list_vbox", "members_list_container", "members_list_vbox")]
+[node name="IngameUI" type="CanvasLayer" node_paths=PackedStringArray("singleplayer_button", "multiplayer_button", "main_menu_container", "lobby_list_container", "lobby_list_vbox", "members_list_container", "members_list_vbox", "lobby_name_label", "leave_lobby_button")]
 follow_viewport_enabled = true
 script = ExtResource("1_hjrhi")
 singleplayer_button = NodePath("MarginContainer/MainMenuUI/VSplitContainer/HSplitContainer/SingleplayerButton")
@@ -13,6 +13,8 @@ lobby_list_container = NodePath("MarginContainer/LobbyList")
 lobby_list_vbox = NodePath("MarginContainer/LobbyList/ListContainer")
 members_list_container = NodePath("MarginContainer/MembersList")
 members_list_vbox = NodePath("MarginContainer/MembersList/VBoxContainer/ListContainer")
+lobby_name_label = NodePath("MarginContainer/MembersList/VBoxContainer/LobbyNameLabel")
+leave_lobby_button = NodePath("MarginContainer/MembersList/VBoxContainer/LeaveLobbyButton")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 offset_right = 459.0

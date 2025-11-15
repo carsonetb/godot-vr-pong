@@ -52,6 +52,7 @@ pose = &"aim"
 show_when_tracked = true
 
 [node name="Paddle" parent="Origin/LeftHand" instance=ExtResource("6_dgpao")]
+script = null
 
 [node name="RightHand" type="XRController3D" parent="Origin"]
 tracker = &"right_hand"
@@ -59,6 +60,7 @@ pose = &"aim"
 show_when_tracked = true
 
 [node name="Paddle" parent="Origin/RightHand" instance=ExtResource("6_dgpao")]
+script = null
 
 [node name="FunctionPointer" parent="Origin/RightHand" instance=ExtResource("4_xkbyp")]
 active_button_action = "select"
@@ -89,8 +91,10 @@ transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.6444342)
 
 [node name="Paddle1" parent="OtherOrigin" instance=ExtResource("6_dgpao")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.6444342)
+script = null
 
 [node name="Paddle2" parent="OtherOrigin" instance=ExtResource("6_dgpao")]
+script = null
 
 [node name="Headset" type="Node3D" parent="OtherOrigin"]
 
