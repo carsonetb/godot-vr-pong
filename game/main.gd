@@ -14,13 +14,8 @@ var other_left_hand_rot: Vector3
 var other_right_hand_target: Vector3
 var other_right_hand_rot: Vector3
 
-func set_p2_poses(pos: Vector3, rot: Vector3, left_hand: Vector3, lh_rot: Vector3, right_hand: Vector3, rh_rot: Vector3) -> void:
-	other_head_target = pos 
-	other_head_rot = rot
-	other_left_hand_target = left_hand
-	other_left_hand_rot = lh_rot
-	other_right_hand_target = right_hand
-	other_right_hand_rot = rh_rot
+func _ready() -> void:
+	XR.environment = $WorldEnvironment.environment
 
 func _process(_delta: float) -> void:
 	other_head.position = lerp(other_head.position, other_head_target, 0.5)
@@ -37,3 +32,12 @@ func _process(_delta: float) -> void:
 		this_right_hand.position,
 		this_right_hand.rotation
 	])
+
+
+func set_p2_poses(pos: Vector3, rot: Vector3, left_hand: Vector3, lh_rot: Vector3, right_hand: Vector3, rh_rot: Vector3) -> void:
+	other_head_target = pos 
+	other_head_rot = rot
+	other_left_hand_target = left_hand
+	other_left_hand_rot = lh_rot
+	other_right_hand_target = right_hand
+	other_right_hand_rot = rh_rot
