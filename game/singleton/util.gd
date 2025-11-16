@@ -28,4 +28,4 @@ func compute_magnus_effect(w: Vector3, v: Vector3) -> Vector3:
 	var Cl: float = PING_PONG_BALL_LIFT_COEFF * S
 
 	var mag: float = 0.5 * AIR_DENSITY_AT_SEA_LEVEL * PING_PONG_BALL_CROSS_AREA * Cl * v_mag * v_mag
-	return dir * mag * 50.0
+	return -dir * mag * 50.0
