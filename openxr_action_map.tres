@@ -1,4 +1,4 @@
-[gd_resource type="OpenXRActionMap" load_steps=16 format=3 uid="uid://dcwpugyxsipck"]
+[gd_resource type="OpenXRActionMap" load_steps=21 format=3 uid="uid://dcwpugyxsipck"]
 
 [sub_resource type="OpenXRAction" id="OpenXRAction_6ivru"]
 resource_name = "reset_ball"
@@ -71,6 +71,26 @@ binding_path = "/user/hand/left/input/select/click"
 interaction_profile_path = "/interaction_profiles/khr/simple_controller"
 bindings = [SubResource("OpenXRIPBinding_typ1r"), SubResource("OpenXRIPBinding_clvbf"), SubResource("OpenXRIPBinding_5bppb"), SubResource("OpenXRIPBinding_3k6la"), SubResource("OpenXRIPBinding_i8esw"), SubResource("OpenXRIPBinding_c4j1d"), SubResource("OpenXRIPBinding_sopde"), SubResource("OpenXRIPBinding_oqnsu")]
 
+[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_6ivru"]
+action = SubResource("OpenXRAction_6ivru")
+binding_path = "/user/hand/left/input/squeeze/click"
+
+[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_vfhwq"]
+action = SubResource("OpenXRAction_6ivru")
+binding_path = "/user/hand/right/input/squeeze/click"
+
+[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_5w03k"]
+action = SubResource("OpenXRAction_typ1r")
+binding_path = "/user/hand/left/input/aim/pose"
+
+[sub_resource type="OpenXRIPBinding" id="OpenXRIPBinding_um1hv"]
+action = SubResource("OpenXRAction_typ1r")
+binding_path = "/user/hand/right/input/aim/pose"
+
+[sub_resource type="OpenXRInteractionProfile" id="OpenXRInteractionProfile_5w03k"]
+interaction_profile_path = "/interaction_profiles/htc/vive_controller"
+bindings = [SubResource("OpenXRIPBinding_6ivru"), SubResource("OpenXRIPBinding_vfhwq"), SubResource("OpenXRIPBinding_5w03k"), SubResource("OpenXRIPBinding_um1hv")]
+
 [resource]
 action_sets = [SubResource("OpenXRActionSet_vfhwq")]
-interaction_profiles = [SubResource("OpenXRInteractionProfile_um1hv")]
+interaction_profiles = [SubResource("OpenXRInteractionProfile_um1hv"), SubResource("OpenXRInteractionProfile_5w03k")]

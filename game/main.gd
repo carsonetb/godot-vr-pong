@@ -16,6 +16,7 @@ var other_right_hand_rot: Vector3
 
 func _ready() -> void:
 	XR.environment = $WorldEnvironment.environment
+	Global.primary_paddle = $Origin/RightHand
 
 func _process(_delta: float) -> void:
 	other_head.position = lerp(other_head.position, other_head_target, 0.5)
