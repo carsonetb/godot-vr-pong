@@ -1,13 +1,13 @@
 [gd_scene load_steps=17 format=3 uid="uid://dpgwdj6kyi1sq"]
 
 [ext_resource type="Script" uid="uid://cc41hyx06tsk0" path="res://game/main.gd" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://bcn6yfrw8rfco" path="res://game/ball.tscn" id="2_xkbyp"]
-[ext_resource type="ArrayMesh" uid="uid://dvtxojks84nx8" path="res://table/PingPongTable/10520_pingpongtable_L2.obj" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://bcn6yfrw8rfco" path="res://game/ball/ball.tscn" id="2_xkbyp"]
 [ext_resource type="Texture2D" uid="uid://bb7li4qkegdcl" path="res://wood_texture/2K/Poliigon_WoodVeneerOak_7760_BaseColor.jpg" id="4_5un7r"]
 [ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="4_xkbyp"]
 [ext_resource type="Texture2D" uid="uid://8tstciu7kv64" path="res://wood_texture/2K/Poliigon_WoodVeneerOak_7760_Normal.png" id="5_dgpao"]
-[ext_resource type="PackedScene" uid="uid://csdmgpladhhw6" path="res://game/paddle.tscn" id="6_dgpao"]
-[ext_resource type="PackedScene" uid="uid://ceg641vg23o0m" path="res://game/headset.glb" id="7_wjctj"]
+[ext_resource type="ArrayMesh" uid="uid://bsmoqmg4f1nfv" path="res://game/models/table/full_mesh.tres" id="5_itumj"]
+[ext_resource type="PackedScene" uid="uid://csdmgpladhhw6" path="res://game/paddle/paddle.tscn" id="6_dgpao"]
+[ext_resource type="PackedScene" uid="uid://ceg641vg23o0m" path="res://game/models/headset.glb" id="7_wjctj"]
 [ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="9_lx3aj"]
 [ext_resource type="PackedScene" uid="uid://bcmpe4efld5t" path="res://game/ui/ingame_ui.tscn" id="10_itumj"]
 
@@ -51,6 +51,11 @@ tracker = &"left_hand"
 pose = &"aim"
 show_when_tracked = true
 
+[node name="FunctionPointer" parent="Origin/LeftHand" instance=ExtResource("4_xkbyp")]
+active_button_action = "select"
+show_laser = 2
+laser_length = 1
+
 [node name="Paddle" parent="Origin/LeftHand" instance=ExtResource("6_dgpao")]
 script = null
 
@@ -62,11 +67,6 @@ show_when_tracked = true
 [node name="Paddle" parent="Origin/RightHand" instance=ExtResource("6_dgpao")]
 script = null
 
-[node name="FunctionPointer" parent="Origin/RightHand" instance=ExtResource("4_xkbyp")]
-active_button_action = "select"
-show_laser = 2
-laser_length = 1
-
 [node name="Table" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Table"]
@@ -75,7 +75,7 @@ shape = SubResource("BoxShape3D_1bvp3")
 
 [node name="10520PingpongtableL2" type="MeshInstance3D" parent="Table"]
 transform = Transform3D(0.01, 0, 0, 0, -4.3711387e-10, 0.01, 0, -0.01, -4.3711387e-10, -0.0068680346, -0.056136936, -1.7369777)
-mesh = ExtResource("3_h2yge")
+mesh = ExtResource("5_itumj")
 skeleton = NodePath("../..")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -101,10 +101,10 @@ script = null
 [node name="headset" parent="OtherOrigin/Headset" instance=ExtResource("7_wjctj")]
 transform = Transform3D(-6.556709e-09, 0, -0.14999999, 0, 0.14999999, 0, 0.14999999, 0, -6.556709e-09, 0, 0, 0)
 
-[node name="UIViewport" parent="." instance=ExtResource("9_lx3aj")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.5854174, 1.5477753, -1.7023824)
+[node name="Viewport2Din3D" parent="." instance=ExtResource("9_lx3aj")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.2437358, 1.5731597, -1.7572091)
 screen_size = Vector2(2.3, 2.9)
 scene = ExtResource("10_itumj")
 viewport_size = Vector2(460, 580)
 unshaded = true
-scene_properties_keys = PackedStringArray("ingame_ui.gd", "singleplayer_button", "multiplayer_button", "main_menu_container", "lobby_list_container", "lobby_list_vbox", "members_list_container", "members_list_vbox", "lobby_name_label", "leave_lobby_button")
+scene_properties_keys = PackedStringArray("ingame_ui.gd")

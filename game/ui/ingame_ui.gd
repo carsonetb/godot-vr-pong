@@ -1,15 +1,15 @@
 class_name IngameUI
 extends CanvasLayer
 
-@export var singleplayer_button: Button
-@export var multiplayer_button: Button
-@export var main_menu_container: Container
-@export var lobby_list_container: Container
-@export var lobby_list_vbox: VBoxContainer
-@export var members_list_container: Container
-@export var members_list_vbox: VBoxContainer
-@export var lobby_name_label: Label
-@export var leave_lobby_button: Button
+@onready var singleplayer_button: Button = $MarginContainer/MainMenuUI/VSplitContainer/HSplitContainer/SingleplayerButton
+@onready var multiplayer_button: Button = $MarginContainer/MainMenuUI/VSplitContainer/HSplitContainer/MultiplayerButton
+@onready var main_menu_container: Container = $MarginContainer/MainMenuUI
+@onready var lobby_list_container: Container = $MarginContainer/LobbyList
+@onready var lobby_list_vbox: VBoxContainer = $MarginContainer/LobbyList/ListContainer
+@onready var members_list_container: Container = $MarginContainer/MembersList
+@onready var members_list_vbox: VBoxContainer = $MarginContainer/MembersList/VBoxContainer/ListContainer
+@onready var lobby_name_label: Label = $MarginContainer/MembersList/VBoxContainer/LobbyNameLabel
+@onready var leave_lobby_button: Button = $MarginContainer/MembersList/VBoxContainer/LeaveLobbyButton
 
 var _stream: LogStream = LogStream.new("UI", LogStream.LogLevel.DEBUG)
 

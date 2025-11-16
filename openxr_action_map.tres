@@ -28,7 +28,7 @@ toplevel_paths = PackedStringArray("/user/hand/left", "/user/hand/right")
 resource_name = "select"
 localized_name = "UI select button"
 action_type = 0
-toplevel_paths = PackedStringArray("/user/hand/left", "/user/hand/right")
+toplevel_paths = PackedStringArray("/user/hand/left")
 
 [sub_resource type="OpenXRActionSet" id="OpenXRActionSet_vfhwq"]
 resource_name = "main"
