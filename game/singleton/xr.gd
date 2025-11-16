@@ -19,7 +19,6 @@ func _ready() -> void:
 	if !xr_interface || !xr_interface.is_initialized():
 		_stream.error("OpenXR not initialized, please check if your headset is connected.")
 		return
-	_stream.debug("OpenXR initialized successfully")
 	viewport = get_viewport()
 	viewport.use_xr = true
 	
@@ -29,6 +28,14 @@ func _ready() -> void:
 		viewport.vrs_mode = Viewport.VRS_XR
 	elif int(ProjectSettings.get_setting("xr/openxr/foveation_level")) == 0:
 		_stream.warn("It is recommended to set foveation level to high in Project Settings.")
+	
+	xr_interface.session_begun.connect(_on_openxr_session_begun)
+	xr_interface.session_visible.connect(_on_openxr_visible_state)
+	xr_interface.session_focussed.connect(_on_openxr_focused_state)
+	xr_interface.session_stopping.connect(_on_openxr_stopping)
+	xr_interface.pose_recentered.connect(_on_openxr_pose_recentered)
+	
+	_stream.debug("OpenXR initialized successfully")
 
 func switch_to_ar() -> bool:
 	if !environment:

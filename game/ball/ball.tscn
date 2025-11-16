@@ -3,21 +3,26 @@
 [ext_resource type="Script" uid="uid://bq7ww14tsiuhp" path="res://game/ball/ball.gd" id="1_j5xc8"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_h2yge"]
-friction = 0.3
-bounce = 0.91
+friction = 0.2
+rough = true
+bounce = 0.88
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_h2yge"]
 radius = 0.02
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_sqgsq"]
-radius = 0.1
-height = 0.2
+radius = 0.02
+height = 0.04
 
 [node name="Ball" type="RigidBody3D"]
-mass = 0.003
+mass = 0.03
 physics_material_override = SubResource("PhysicsMaterial_h2yge")
+can_sleep = false
 continuous_cd = true
 linear_damp_mode = 1
+linear_damp = 0.01
+angular_damp_mode = 1
+angular_damp = 0.02
 script = ExtResource("1_j5xc8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

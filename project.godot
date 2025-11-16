@@ -41,6 +41,8 @@ enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg", "res://addon
 [physics]
 
 3d/physics_engine="Jolt Physics"
+jolt_physics_3d/simulation/velocity_steps=16
+jolt_physics_3d/simulation/allow_sleep=false
 
 [rendering]
 
