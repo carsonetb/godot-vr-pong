@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bcn6yfrw8rfco"]
+[gd_scene load_steps=6 format=3 uid="uid://bcn6yfrw8rfco"]
 
 [ext_resource type="Script" uid="uid://bq7ww14tsiuhp" path="res://game/ball/ball.gd" id="1_j5xc8"]
 
@@ -14,7 +14,10 @@ radius = 0.02
 radius = 0.02
 height = 0.04
 
-[node name="Ball" type="RigidBody3D"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_sqgsq"]
+radius = 0.022840908
+
+[node name="Ball" type="RigidBody3D" node_paths=PackedStringArray("detection_area")]
 mass = 0.03
 physics_material_override = SubResource("PhysicsMaterial_h2yge")
 can_sleep = false
@@ -24,9 +27,15 @@ linear_damp = 0.01
 angular_damp_mode = 1
 angular_damp = 0.02
 script = ExtResource("1_j5xc8")
+detection_area = NodePath("DetectionArea")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_h2yge")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_sqgsq")
+
+[node name="DetectionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
+shape = SubResource("SphereShape3D_sqgsq")

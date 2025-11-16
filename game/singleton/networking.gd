@@ -1,7 +1,7 @@
 extends Node
 
 signal lobby_match_list(lobbies: Array[LobbyInfo])
-signal lobby_joined
+signal lobby_joined()
 signal member_list_updated(list: Array[LobbyMember])
 
 const STEAM_APP_ID: int = 480
@@ -17,6 +17,7 @@ var lobby_id: int = 0
 var lobby_members: Array[LobbyMember]
 var lobby_members_max: int = 10
 var lobby_vote_kick: bool = false
+var is_lobby_owner: bool = false
 var steam_id: int
 var steam_username: String
 
@@ -117,9 +118,11 @@ func check_command_line() -> void:
 
 func create_lobby() -> void:
 	if lobby_id == 0:
+		is_lobby_owner = true
 		Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, lobby_members_max)
 
 func join_lobby(this_lobby_id: int) -> void:
+	is_lobby_owner = false
 	_networking_stream.debug("Attempting to join lobby %s" % this_lobby_id)
 	lobby_members.clear()
 	Steam.joinLobby(this_lobby_id)

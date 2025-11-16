@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dpgwdj6kyi1sq"]
+[gd_scene load_steps=19 format=3 uid="uid://dpgwdj6kyi1sq"]
 
 [ext_resource type="Script" uid="uid://cc41hyx06tsk0" path="res://game/main.gd" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://bb7li4qkegdcl" path="res://wood_texture/2K/Poliigon_WoodVeneerOak_7760_BaseColor.jpg" id="4_5un7r"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://csdmgpladhhw6" path="res://game/paddle/paddle.tscn" id="6_dgpao"]
 [ext_resource type="PackedScene" uid="uid://ceg641vg23o0m" path="res://game/models/headset.glb" id="7_wjctj"]
 [ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="9_lx3aj"]
+[ext_resource type="PackedScene" uid="uid://bcn6yfrw8rfco" path="res://game/ball/ball.tscn" id="10_dp3pf"]
 [ext_resource type="PackedScene" uid="uid://bcmpe4efld5t" path="res://game/ui/ingame_ui.tscn" id="10_itumj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5un7r"]
@@ -21,6 +22,9 @@ sky = SubResource("Sky_dgpao")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1bvp3"]
 size = Vector3(1.5309961, 0.08502197, 2.7635546)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lx3aj"]
+size = Vector3(3.2393494, 0.63957787, 3.2631836)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
 albedo_texture = ExtResource("4_5un7r")
@@ -76,6 +80,12 @@ transform = Transform3D(0.01, 0, 0, 0, -4.3711387e-10, 0.01, 0, -0.01, -4.371138
 mesh = ExtResource("5_itumj")
 skeleton = NodePath("../..")
 
+[node name="MyArea" type="Area3D" parent="Table"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Table/MyArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004043579, 1.0723848, -0.103271484)
+shape = SubResource("BoxShape3D_lx3aj")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.44789955, 0.89408386, 0, -0.89408386, 0.44789955, 0, 0.15096873, 0)
 shadow_enabled = true
@@ -126,3 +136,6 @@ scene = ExtResource("10_itumj")
 viewport_size = Vector2(460, 580)
 unshaded = true
 scene_properties_keys = PackedStringArray("ingame_ui.gd")
+
+[node name="Ball" parent="." instance=ExtResource("10_dp3pf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04960513, 0.7749999, -1.225881)
