@@ -92,8 +92,8 @@ func set_remote_variable(node: Node, varname: String) -> void:
 func call_remote_function(node: Node, function: String, args: Array) -> void:
 	send_p2p_packet(0, {"message": "call_function", "path": node.get_path(), "name": function, "args": args})
 
-func send_p2p_packet(this_target: int, packet_data: Dictionary) -> void:
-	var send_type: int = Steam.P2P_SEND_RELIABLE
+func send_p2p_packet(this_target: int, packet_data: Dictionary, reliable: bool = false) -> void:
+	var send_type: int = Steam.P2P_SEND_UNRELIABLE_NO_DELAY if !reliable else Steam.P2P_SEND_RELIABLE
 	var channel: int = 0
 	
 	var this_data: PackedByteArray

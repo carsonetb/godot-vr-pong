@@ -16,7 +16,9 @@ var other_right_hand_rot: Vector3
 
 func _ready() -> void:
 	XR.environment = $WorldEnvironment.environment
+	Global.other_origin = $OtherOrigin
 	Global.primary_paddle = $Origin/RightHand
+	Global.secondary_paddle = $Origin/LeftHand
 	Global.main_world = self
 
 func _process(_delta: float) -> void:

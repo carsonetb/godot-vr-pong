@@ -96,8 +96,8 @@ func _on_openxr_session_begun() -> void:
 		xr_interface.set_display_refresh_rate(new_rate)
 		current_refresh_rate = new_rate
 	
-	_stream.debug("Setting physics engine TPS to %s based on XR refresh rate" % current_refresh_rate)
-	Engine.physics_ticks_per_second = current_refresh_rate
+	_stream.debug("Setting physics engine TPS to %s" % 240)
+	Engine.physics_ticks_per_second = 240
 
 func _on_openxr_visible_state() -> void:
 	if xr_is_focused:

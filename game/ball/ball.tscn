@@ -3,8 +3,7 @@
 [ext_resource type="Script" uid="uid://bq7ww14tsiuhp" path="res://game/ball/ball.gd" id="1_j5xc8"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_h2yge"]
-friction = 0.2
-rough = true
+friction = 0.4
 bounce = 0.88
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_h2yge"]
@@ -18,6 +17,7 @@ height = 0.04
 radius = 0.022840908
 
 [node name="Ball" type="RigidBody3D" node_paths=PackedStringArray("detection_area")]
+collision_layer = 3
 mass = 0.03
 physics_material_override = SubResource("PhysicsMaterial_h2yge")
 can_sleep = false

@@ -47,7 +47,7 @@ func _remote_update_ball_posrot(pos: Vector3, rot: Vector3) -> void:
 
 func _remote_transfer_ownership(pos: Vector3, rot: Vector3, vel: Vector3, rotvel: Vector3) -> void:
 	ball_owner = true
-	position = pos
+	position = Global.other_origin.position + Vector3(pos.x, pos.y, -pos.z)
 	rotation = rot
 	linear_velocity = vel
 	angular_velocity = rotvel
