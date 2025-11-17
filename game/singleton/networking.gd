@@ -47,6 +47,7 @@ func begin_networking() -> void:
 	_networking_stream.debug("Requesting lobby list")
 	request_lobbies()
 	
+	networking_enabled = true
 	_networking_stream.info("Networking setup complete and successful")
 
 func _process(_delta: float) -> void:
