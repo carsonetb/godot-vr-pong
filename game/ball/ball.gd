@@ -22,9 +22,9 @@ func _process(_delta: float) -> void:
 	if ball_owner:
 		Networking.call_remote_function(self, "_remote_update_ball_posrot", [position, rotation])
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if freeze && !attached_to_paddle:
-		position = position.lerp(target_pos, 0.5)
+		position = position.lerp(target_pos, 0.5 * delta * 60)
 		return
 	apply_central_force(Util.compute_drag_from_vel(
 		linear_velocity, 
@@ -54,7 +54,8 @@ func _on_lobby_joined() -> void:
 		position = Vector3(1000, 1000, 1000) # Until we are respawned
 
 func _remote_update_ball_posrot(pos: Vector3, rot: Vector3) -> void:
-	ball_owner = false
+	if ball_owner: # Probably old packets
+		return
 	freeze = true
 	target_pos = pos
 	rotation = rot

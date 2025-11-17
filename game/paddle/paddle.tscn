@@ -24,14 +24,14 @@ ball_scene = ExtResource("2_i5ku1")
 ball_spawn_point = NodePath("BallSpawnPoint")
 
 [node name="Model" parent="." instance=ExtResource("1_185fh")]
-transform = Transform3D(0.023843562, -0.010367475, -8.0055506e-17, -4.5317686e-10, -1.0422359e-09, 0.026000004, -0.0103674745, -0.023843564, -1.1364959e-09, 0, 0, -0.061386354)
+transform = Transform3D(0.02384356, -0.010367477, 0, -4.5317675e-10, -1.0422353e-09, 0.026000002, -0.010367475, -0.023843564, -1.1364962e-09, 0, 0, -0.061386354)
 
 [node name="CollisionShape3D1" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.025999941, 5.5561773e-05, -2.4287603e-12, 2.4288325e-12, 2.220446e-15, 0.026000004, 5.5562705e-05, -0.025999943, -2.220446e-15, 0, 0, -0.061386354)
+transform = Transform3D(0.025999941, 5.556271e-05, 2.4287232e-12, 0, -1.1364962e-09, 0.026000004, 5.55627e-05, -0.025999943, -1.1364937e-09, 0, 0, -0.061386354)
 shape = SubResource("ConvexPolygonShape3D_obkje")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.025999941, 5.5561773e-05, -2.4287603e-12, 2.4288325e-12, 2.220446e-15, 0.026000004, 5.5562705e-05, -0.025999943, -2.220446e-15, 0, 0, -0.061386354)
+transform = Transform3D(0.025999941, 5.556271e-05, 2.4287232e-12, 0, -1.1364962e-09, 0.026000004, 5.55627e-05, -0.025999943, -1.1364937e-09, 0, 0, -0.061386354)
 shape = SubResource("ConvexPolygonShape3D_qgg7w")
 
 [node name="BallSpawnPoint" type="Marker3D" parent="."]
