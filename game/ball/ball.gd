@@ -38,7 +38,6 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		state.transform.basis = Basis.from_euler(rotation_to_override)
 		state.linear_velocity = velocity_to_override
 		state.angular_velocity = angvel_to_override
-		freeze = false
 
 func _on_detection_area_exited(area: Area3D) -> void:
 	if area.name == "MyArea" && Networking.networking_enabled:
@@ -66,6 +65,7 @@ func _remote_transfer_ownership(pos: Vector3, rot: Vector3, vel: Vector3, rotvel
 	rotation_to_override = rot
 	velocity_to_override = vel
 	angvel_to_override = rotvel
+	freeze = false
 
 func _remote_take_ownership() -> void:
 	ball_owner = false
