@@ -27,9 +27,7 @@ func _physics_process(_delta: float) -> void:
 
 func _on_detection_area_exited(area: Area3D) -> void:
 	if area.name == "MyArea" && Networking.networking_enabled:
-		Networking.call_remote_function(self, "_remote_transfer_ownership", [
-			position, rotation, linear_velocity, angular_velocity
-		])
+		Networking.call_remote_function(self, "_remote_transfer_ownership", [position, rotation, linear_velocity, angular_velocity])
 		ball_owner = false
 		freeze = true
 
