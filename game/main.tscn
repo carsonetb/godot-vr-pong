@@ -20,8 +20,8 @@ sky_material = SubResource("ProceduralSkyMaterial_5un7r")
 background_mode = 2
 sky = SubResource("Sky_dgpao")
 
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_itumj"]
-plane = Plane(0, 0, 1, -1.634)
+[sub_resource type="BoxShape3D" id="BoxShape3D_itumj"]
+size = Vector3(19.081604, 20.13086, 5.406616)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_itumj"]
 friction = 0.4
@@ -79,8 +79,8 @@ pose = &"pos"
 [node name="MyArea" type="Area3D" parent="Origin"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Origin/MyArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004043579, 1.515125, -0.103271484)
-shape = SubResource("WorldBoundaryShape3D_itumj")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8569489, -1.4487419, 0.96429443)
+shape = SubResource("BoxShape3D_itumj")
 
 [node name="Table" type="StaticBody3D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_itumj")
