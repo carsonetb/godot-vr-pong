@@ -30,6 +30,8 @@ func _primary_controller_button_pressed(button: String) -> void:
 		Global.ball.freeze = true
 		Global.ball.ball_owner = true
 		Global.ball.global_position = affiliated_controller.global_position
+		Global.ball.linear_velocity = Vector3.ZERO
+		Global.ball.angular_velocity = Vector3.ZERO
 		Networking.call_remote_function(Global.ball, "_remote_transfer_ownership", [Global.ball.global_position, Global.ball.global_rotation, Global.ball.linear_velocity, Global.ball.angular_velocity])
 
 func _primary_controller_button_released(button: String) -> void:

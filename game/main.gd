@@ -8,11 +8,11 @@ extends Node3D
 @onready var this_right_hand: Node3D = $Origin/RightHand
 
 var other_head_target: Vector3
-var other_head_rot: Vector3
+var other_head_rot: Quaternion
 var other_left_hand_target: Vector3
-var other_left_hand_rot: Vector3
+var other_left_hand_rot: Quaternion
 var other_right_hand_target: Vector3
-var other_right_hand_rot: Vector3
+var other_right_hand_rot: Quaternion
 
 var other_origin_pos: Vector3 = Vector3(0.0, 0.0, -3.533)
 var other_origin_rot: Vector3 = Vector3(0.0, 180.0, 0.0)
@@ -27,21 +27,21 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	other_head.global_position = lerp(other_head.global_position, other_head_target, 0.5)
-	other_head.global_rotation = other_head.global_rotation.slerp(other_head_rot, 0.5)
+	other_head.global_basis = other_head.global_basis.get_rotation_quaternion().slerp(other_head_rot, 0.5)
 	other_left_hand.global_position = lerp(other_left_hand.global_position, other_left_hand_target, 0.5)
-	other_left_hand.global_rotation = other_left_hand.global_rotation.slerp(other_left_hand_rot, 0.5)
+	other_left_hand.global_basis = other_left_hand.global_basis.get_rotation_quaternion().slerp(other_left_hand_rot, 0.5)
 	other_right_hand.global_position = lerp(other_right_hand.global_position, other_right_hand_target, 0.5)
-	other_right_hand.global_rotation = other_right_hand.global_rotation.slerp(other_right_hand_rot, 0.5)
+	other_right_hand.global_basis = other_right_hand.global_basis.get_rotation_quaternion().slerp(other_right_hand_rot, 0.5)
 	Networking.call_remote_function(self, "set_p2_poses", [
 		this_head.global_position, 
-		this_head.global_rotation,
+		this_head.global_basis.get_rotation_quaternion(),
 		this_left_hand.global_position, 
-		this_left_hand.global_rotation,
+		this_left_hand.global_basis.get_rotation_quaternion(),
 		this_right_hand.global_position,
-		this_right_hand.global_rotation
+		this_right_hand.global_basis.get_rotation_quaternion()
 	])
 
-func set_p2_poses(pos: Vector3, rot: Vector3, left_hand: Vector3, lh_rot: Vector3, right_hand: Vector3, rh_rot: Vector3) -> void:
+func set_p2_poses(pos: Vector3, rot: Quaternion, left_hand: Vector3, lh_rot: Quaternion, right_hand: Vector3, rh_rot: Quaternion) -> void:
 	other_head_target = pos 
 	other_head_rot = rot
 	other_left_hand_target = left_hand

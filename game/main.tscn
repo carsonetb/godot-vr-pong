@@ -20,8 +20,8 @@ sky_material = SubResource("ProceduralSkyMaterial_5un7r")
 background_mode = 2
 sky = SubResource("Sky_dgpao")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_lx3aj"]
-size = Vector3(3.2393494, 3.2917304, 3.2631836)
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_itumj"]
+plane = Plane(0, 0, 1, -1.634)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_itumj"]
 friction = 0.4
@@ -80,7 +80,7 @@ pose = &"pos"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Origin/MyArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004043579, 1.515125, -0.103271484)
-shape = SubResource("BoxShape3D_lx3aj")
+shape = SubResource("WorldBoundaryShape3D_itumj")
 
 [node name="Table" type="StaticBody3D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_itumj")
@@ -132,10 +132,8 @@ transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.6444342)
 transform = Transform3D(-6.556709e-09, 0, -0.14999999, 0, 0.14999999, 0, 0.14999999, 0, -6.556709e-09, 0, 0, 0)
 
 [node name="Paddle1" parent="OtherOrigin" instance=ExtResource("6_dgpao")]
-enabled = false
 
 [node name="Paddle2" parent="OtherOrigin" instance=ExtResource("6_dgpao")]
-enabled = false
 
 [node name="Viewport2Din3D" parent="." instance=ExtResource("9_lx3aj")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.2437358, 1.5731597, -1.7572091)

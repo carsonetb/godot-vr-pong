@@ -11,6 +11,7 @@ var position_to_override: Vector3
 var rotation_to_override: Vector3
 var velocity_to_override: Vector3
 var angvel_to_override: Vector3
+var target_pos: Vector3
 
 func _ready() -> void:
 	Global.ball = self
@@ -23,6 +24,7 @@ func _process(_delta: float) -> void:
 
 func _physics_process(_delta: float) -> void:
 	if freeze:
+		position = position.lerp(target_pos, 0.5)
 		return
 	apply_central_force(Util.compute_drag_from_vel(
 		linear_velocity, 
@@ -54,8 +56,8 @@ func _on_lobby_joined() -> void:
 func _remote_update_ball_posrot(pos: Vector3, rot: Vector3) -> void:
 	ball_owner = false
 	freeze = true
-	global_position = pos
-	global_rotation = rot
+	target_pos = pos
+	rotation = rot
 
 func _remote_transfer_ownership(pos: Vector3, rot: Vector3, vel: Vector3, rotvel: Vector3) -> void:
 	freeze = true
