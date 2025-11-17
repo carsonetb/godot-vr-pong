@@ -6,6 +6,12 @@ var attached_to_paddle: bool = false
 
 @export var detection_area: Area3D
 
+var should_override_and_unfreeze: bool
+var position_to_override: Vector3
+var rotation_to_override: Vector3
+var velocity_to_override: Vector3
+var angvel_to_override: Vector3
+
 func _ready() -> void:
 	Global.ball = self
 	Networking.lobby_joined.connect(_on_lobby_joined)
@@ -24,6 +30,14 @@ func _physics_process(_delta: float) -> void:
 		Util.PING_PONG_BALL_DRAG_COEFF
 	))
 	apply_central_force(Util.compute_magnus_effect(linear_velocity, angular_velocity))
+
+func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	if should_override_and_unfreeze:
+		state.transform.origin = position_to_override
+		state.transform.basis = Basis.from_euler(rotation_to_override)
+		state.linear_velocity = velocity_to_override
+		state.angular_velocity = angvel_to_override
+		freeze = false
 
 func _on_detection_area_exited(area: Area3D) -> void:
 	if area.name == "MyArea" && Networking.networking_enabled:
@@ -44,12 +58,12 @@ func _remote_update_ball_posrot(pos: Vector3, rot: Vector3) -> void:
 	rotation = rot
 
 func _remote_transfer_ownership(pos: Vector3, rot: Vector3, vel: Vector3, rotvel: Vector3) -> void:
+	freeze = true
 	ball_owner = true
-	position = Global.other_origin.position + Vector3(pos.x, pos.y, -pos.z)
-	rotation = rot
-	linear_velocity = vel
-	angular_velocity = rotvel
-	freeze = false
+	position_to_override = Global.other_origin.position + Vector3(pos.x, pos.y, -pos.z)
+	rotation_to_override = rot
+	velocity_to_override = vel
+	angvel_to_override = rotvel
 
 func _remote_take_ownership() -> void:
 	ball_owner = false

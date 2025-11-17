@@ -30,7 +30,7 @@ func _primary_controller_button_pressed(button: String) -> void:
 		Global.ball.freeze = true
 		Global.ball.ball_owner = true
 		Global.ball.global_position = affiliated_controller.global_position
-		Networking.call_remote_function(Global.ball, "_remote_transfer_ownership", [])
+		Networking.call_remote_function(Global.ball, "_remote_transfer_ownership", [Global.ball.position, Global.ball.rotation, Global.ball.linear_velocity, Global.ball.angular_velocity])
 
 func _primary_controller_button_released(button: String) -> void:
 	if button == "reset_ball" && ball_spawned && !enabled && affiliated_controller:

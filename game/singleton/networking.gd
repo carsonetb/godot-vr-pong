@@ -91,6 +91,8 @@ func set_remote_variable(node: Node, varname: String) -> void:
 	send_p2p_packet(0, {"message": "set_variable", "path": node.get_path(), "varname": varname, "value": node.get(varname)})
 
 func call_remote_function(node: Node, function: String, args: Array) -> void:
+	if function == "_remote_transfer_ownership":
+		print(args)
 	send_p2p_packet(0, {"message": "call_function", "path": node.get_path(), "name": function, "args": args})
 
 func send_p2p_packet(this_target: int, packet_data: Dictionary) -> void:
