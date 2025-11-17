@@ -49,6 +49,10 @@ environment = SubResource("Environment_wjctj")
 
 [node name="Origin" type="XROrigin3D" parent="."]
 
+[node name="OpenXRRenderModelManager" type="OpenXRRenderModelManager" parent="Origin"]
+tracker = 2
+make_local_to_pose = "pos"
+
 [node name="XRCamera3D" type="XRCamera3D" parent="Origin"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3796642, 0)
 

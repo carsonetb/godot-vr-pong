@@ -57,5 +57,7 @@ initialization/embed_callbacks=false
 [xr]
 
 openxr/enabled=true
+openxr/extensions/render_model=true
 shaders/enabled=true
 openxr/extensions/meta/color_space/starting_color_space=3
+openxr/extensions/meta/render_model=true

@@ -9,7 +9,7 @@ var attached_to_paddle: bool = false
 func _ready() -> void:
 	Global.ball = self
 	Networking.lobby_joined.connect(_on_lobby_joined)
-	detection_area.area_entered.connect(_on_detection_area_exited)
+	detection_area.area_exited.connect(_on_detection_area_exited)
 
 func _process(_delta: float) -> void:
 	if ball_owner:
