@@ -21,7 +21,7 @@ background_mode = 2
 sky = SubResource("Sky_dgpao")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lx3aj"]
-size = Vector3(3.2393494, 1.5229139, 3.2631836)
+size = Vector3(3.2393494, 3.2917304, 3.2631836)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_itumj"]
 friction = 0.4
@@ -79,7 +79,7 @@ pose = &"pos"
 [node name="MyArea" type="Area3D" parent="Origin"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Origin/MyArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004043579, 0.6307168, -0.103271484)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004043579, 1.515125, -0.103271484)
 shape = SubResource("BoxShape3D_lx3aj")
 
 [node name="Table" type="StaticBody3D" parent="."]

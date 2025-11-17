@@ -34,8 +34,8 @@ func _physics_process(_delta: float) -> void:
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	if should_override_and_unfreeze:
 		should_override_and_unfreeze = false
-		state.global_transform.origin = position_to_override
-		state.global_transform.basis = Basis.from_euler(rotation_to_override)
+		state.transform.origin = position_to_override
+		state.transform.basis = Basis.from_euler(rotation_to_override)
 		state.linear_velocity = velocity_to_override
 		state.angular_velocity = angvel_to_override
 
