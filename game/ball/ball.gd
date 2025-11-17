@@ -63,7 +63,7 @@ func _remote_transfer_ownership(pos: Vector3, rot: Vector3, vel: Vector3, rotvel
 	should_override_and_unfreeze = true
 	position_to_override = Global.other_origin.position + Vector3(pos.x, pos.y, -pos.z)
 	rotation_to_override = rot
-	velocity_to_override = vel
+	velocity_to_override = Vector3(-vel.x, vel.y, -vel.z)
 	angvel_to_override = rotvel
 	freeze = false
 
