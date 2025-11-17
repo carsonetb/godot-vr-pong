@@ -60,6 +60,7 @@ func _remote_update_ball_posrot(pos: Vector3, rot: Vector3) -> void:
 func _remote_transfer_ownership(pos: Vector3, rot: Vector3, vel: Vector3, rotvel: Vector3) -> void:
 	freeze = true
 	ball_owner = true
+	should_override_and_unfreeze = true
 	position_to_override = Global.other_origin.position + Vector3(pos.x, pos.y, -pos.z)
 	rotation_to_override = rot
 	velocity_to_override = vel
