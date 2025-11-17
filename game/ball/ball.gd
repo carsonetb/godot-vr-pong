@@ -23,7 +23,7 @@ func _process(_delta: float) -> void:
 		Networking.call_remote_function(self, "_remote_update_ball_posrot", [position, rotation])
 
 func _physics_process(_delta: float) -> void:
-	if freeze:
+	if freeze && !attached_to_paddle:
 		position = position.lerp(target_pos, 0.5)
 		return
 	apply_central_force(Util.compute_drag_from_vel(

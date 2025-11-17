@@ -29,6 +29,7 @@ func _primary_controller_button_pressed(button: String) -> void:
 		ball_spawned = true
 		Global.ball.freeze = true
 		Global.ball.ball_owner = true
+		Global.ball.attached_to_paddle = true
 		Global.ball.global_position = affiliated_controller.global_position
 		Global.ball.linear_velocity = Vector3.ZERO
 		Global.ball.angular_velocity = Vector3.ZERO
@@ -37,4 +38,5 @@ func _primary_controller_button_pressed(button: String) -> void:
 func _primary_controller_button_released(button: String) -> void:
 	if button == "reset_ball" && ball_spawned && !enabled && affiliated_controller:
 		Global.ball.freeze = false
+		Global.ball.attached_to_paddle = false
 		ball_spawned = false
