@@ -43,7 +43,8 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 
 func _on_detection_area_exited(area: Area3D) -> void:
 	if area.name == "MyArea" && Networking.networking_enabled:
-		Networking.call_remote_function(self, "_remote_transfer_ownership", [global_position, global_position, linear_velocity, angular_velocity])
+		Networking.call_remote_function(self, "_remote_transfer_ownership", [global_position, global_rotation, linear_velocity, angular_velocity])
+		target_pos = global_position
 		ball_owner = false
 		freeze = true
 

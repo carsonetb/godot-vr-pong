@@ -34,7 +34,7 @@ func _process(_delta: float) -> void:
 	other_right_hand.global_basis = other_right_hand.global_basis.get_rotation_quaternion().slerp(other_right_hand_rot, 0.5)
 	Networking.call_remote_function(self, "set_p2_poses", [
 		this_head.global_position, 
-		this_head.global_basis.get_rotation_quaternion(),
+		this_head.global_basis.get_rotation_quaternion().inverse(),
 		this_left_hand.global_position, 
 		this_left_hand.global_basis.get_rotation_quaternion(),
 		this_right_hand.global_position,

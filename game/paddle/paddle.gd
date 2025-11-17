@@ -13,11 +13,6 @@ func _ready() -> void:
 	Global.secondary_paddle.button_pressed.connect(_primary_controller_button_pressed)
 	Global.secondary_paddle.button_released.connect(_primary_controller_button_released)
 	
-	if "Quest" in XR.xr_interface.get_name():
-		$Model.rotation.x = -70.0
-		$CollisionShape3D1.rotation.x = -70.0
-		$CollisionShape3D2.rotation.x = -70.0
-	
 func _physics_process(delta: float) -> void:
 	$CollisionShape3D1.disabled = !enabled
 	$CollisionShape3D2.disabled = !enabled
