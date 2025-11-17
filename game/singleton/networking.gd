@@ -3,6 +3,7 @@ extends Node
 signal lobby_match_list(lobbies: Array[LobbyInfo])
 signal lobby_joined()
 signal member_list_updated(list: Array[LobbyMember])
+signal user_joined_lobby(id: int)
 
 const STEAM_APP_ID: int = 480
 const PACKET_READ_LIMIT: int = 32
@@ -91,8 +92,6 @@ func set_remote_variable(node: Node, varname: String) -> void:
 	send_p2p_packet(0, {"message": "set_variable", "path": node.get_path(), "varname": varname, "value": node.get(varname)})
 
 func call_remote_function(node: Node, function: String, args: Array) -> void:
-	if function == "_remote_transfer_ownership":
-		print(args)
 	send_p2p_packet(0, {"message": "call_function", "path": node.get_path(), "name": function, "args": args})
 
 func send_p2p_packet(this_target: int, packet_data: Dictionary) -> void:
@@ -210,6 +209,7 @@ func _on_lobby_chat_update(_this_lobby_id: int, change_id: int, _making_change_i
 
 	if chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_ENTERED:
 		_networking_stream.info("%s has joined the lobby." % changer_name)
+		user_joined_lobby.emit(change_id)
 	elif chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_LEFT:
 		_networking_stream.info("%s has left the lobby." % changer_name)
 	elif chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_KICKED:

@@ -34,14 +34,14 @@ func _physics_process(_delta: float) -> void:
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	if should_override_and_unfreeze:
 		should_override_and_unfreeze = false
-		state.transform.origin = position_to_override
-		state.transform.basis = Basis.from_euler(rotation_to_override)
+		state.global_transform.origin = position_to_override
+		state.global_transform.basis = Basis.from_euler(rotation_to_override)
 		state.linear_velocity = velocity_to_override
 		state.angular_velocity = angvel_to_override
 
 func _on_detection_area_exited(area: Area3D) -> void:
 	if area.name == "MyArea" && Networking.networking_enabled:
-		Networking.call_remote_function(self, "_remote_transfer_ownership", [position, rotation, linear_velocity, angular_velocity])
+		Networking.call_remote_function(self, "_remote_transfer_ownership", [global_position, global_position, linear_velocity, angular_velocity])
 		ball_owner = false
 		freeze = true
 
@@ -54,16 +54,16 @@ func _on_lobby_joined() -> void:
 func _remote_update_ball_posrot(pos: Vector3, rot: Vector3) -> void:
 	ball_owner = false
 	freeze = true
-	position = Global.other_origin.position + Vector3(pos.x, pos.y, -pos.z)
-	rotation = rot
+	global_position = pos
+	global_rotation = rot
 
 func _remote_transfer_ownership(pos: Vector3, rot: Vector3, vel: Vector3, rotvel: Vector3) -> void:
 	freeze = true
 	ball_owner = true
 	should_override_and_unfreeze = true
-	position_to_override = Global.other_origin.position + Vector3(pos.x, pos.y, -pos.z)
+	position_to_override = pos
 	rotation_to_override = rot
-	velocity_to_override = Vector3(-vel.x, vel.y, -vel.z)
+	velocity_to_override = vel
 	angvel_to_override = rotvel
 	freeze = false
 
